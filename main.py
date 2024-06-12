@@ -29,3 +29,199 @@ def twoSum(nums, target_num):
             return [i, value]
         else:
             hash[nums[i]] = i
+
+# print(twoSum([1, 2, 3, 5], 7))
+
+def twoSum2(nums, target_num):
+    hash = {}
+    for i, n in enumerate(nums):
+        diff = target_num - n
+        if diff in hash:
+            return [hash[diff], i]
+        else:
+            hash[diff] = i
+
+
+
+# You are given an array prices where prices[i] is the price of
+# a given stock on the ith day.
+# You want to maximize your profit by choosing a single day to
+# buy one stock and choosing a different day in the future to sell that stock.
+#Return the maximum profit you can achieve from this transaction.
+# If you cannot achieve any profit, return 0.
+
+# Example 1:
+
+# Input: prices = [7,1,5,3,6,4]
+# Output: 5
+# Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+# Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+# Example 2:
+
+# Input: prices = [7,6,4,3,1]
+# Output: 0
+# Explanation: In this case, no transactions are done and the max profit = 0.
+
+# input: list of nums
+# output: num => max profit
+# want to buy low and sell high - make the most profit
+#   [7, 1, 5, 3, 6, 4] =>  5 < 6
+#       b           s
+# max_profit = 5
+# buy:  1 ele 1
+# sell: 5 ele 4
+#
+
+def maxProfit(prices):
+    buy = 1
+    sell = 1
+    max_profit = 0
+    while sell < len(prices):
+        if prices[buy] < prices[sell]:
+            diff = prices[sell] - prices[buy]
+            if diff > max_profit:
+                max_profit = diff
+        else:
+            buy = sell
+        sell += 1
+
+    return max_profit
+
+
+# Given a string s containing just the characters
+# '(', ')', '{', '}', '[' and ']',
+# determine if the input string is valid.
+
+# An input string is valid if:
+
+# Open brackets must be closed by the same type of brackets.
+# Open brackets must be closed in the correct order.
+# Every close bracket has a corresponding open bracket of the same type.
+# Example 1:
+    # Input: s = "()"
+    # Output: true
+
+# Example 2:
+    # Input: s = "()[]{}"
+    # Output: true
+
+# Example 3:
+    # Input: s = "(]"
+    # Output: false
+# Example 4:
+    # Input: s = '(())((()())())'
+    # Output: true
+
+# hash {'(': ')', '{': '}', '[': ']'}
+#iterate through the string "()[]{}"
+#                              i
+# if the next char is not the value of the key in hash return false
+
+def validParens(str):
+    hash = {'(': ')', '{': '}', '[': ']'}
+    for i in range(len(str), 2):
+        print('next', str[i + 1])
+        print('curr', hash[str[i]])
+        if str[i + 1] != hash[str[i]]:
+            return False
+
+    return True
+
+
+# print(validParens("(])}"))
+
+# You are given the heads of two sorted linked lists list1 and list2.
+
+# Merge the two lists into one sorted list. The list should be made by splicing
+#  together the nodes of the first two lists.
+
+# Return the head of the merged linked list.
+
+# Example 1
+# Input: list1 = [1,2,4], list2 = [1,3,4]
+# Output: [1,1,2,3,4,4]
+
+# Example 2:
+# Input: list1 = [], list2 = []
+# Output: []
+
+# Example 3:
+# Input: list1 = [], list2 = [0]
+# Output: [0]
+
+
+# A phrase is a palindrome if, after converting all uppercase letters into
+# lowercase letters and removing all non-alphanumeric characters, it reads
+# the same forward and backward. Alphanumeric characters include letters
+# and numbers.
+
+# Given a string s, return true if it is a palindrome, or false otherwise.
+
+# Example 1:
+
+# Input: s = "A man, a plan, a canal: Panama"
+# Output: true
+# Explanation: "amanaplanacanalpanama" is a palindrome.
+# Example 2:
+
+# Input: s = "race a car"
+# Output: false
+# Explanation: "raceacar" is not a palindrome.
+# Example 3:
+
+# Input: s = " "
+# Output: true
+# Explanation: s is an empty string "" after removing non-alphanumeric characters.
+# Since an empty string reads the same forward and backward, it is a palindrome.
+
+# input string
+# output boolean
+# convert str to lowercase and get rid of all alphanumeric chars
+# reverse method
+# iterate backwards and put all eles in a new str
+# compare input string with new str
+# s = "A man, a plan, a canal: Panama"
+# "amanaplanacanalpanama"
+import re
+
+def isPalindrome1(s):
+    if len(s) <= 1:
+        return True
+
+    pattern = r'[^a-zA-Z0-9]'
+    cleaned_str = re.sub(pattern, '', s).lower()
+
+    return cleaned_str == cleaned_str[::-1]
+
+def isPalindrome2(s):
+    if len(s) <= 1:
+        return True
+
+    cleaned = ''.join(e for e in s if e.isalnum()).lower()
+    return cleaned == cleaned[::-1]
+
+## tACo Cam!
+#     33
+# start: 0
+# end: 8
+
+
+def isPalindrome(s):
+    start = 0
+    end = len(s)-1
+    while start < end:
+        if not s[start].isalnum():
+            start += 1
+        elif not s[end].isalnum():
+            end -= 1
+        elif s[start].lower() == s[end].lower():
+            start += 1
+            end -= 1
+        else:
+            return False
+    return True
+
+
+
+
+print(isPalindrome("A man, a plan, a canal: Panama"))
