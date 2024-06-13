@@ -111,24 +111,26 @@ def maxProfit(prices):
 # Example 4:
     # Input: s = '(())((()())())'
     # Output: true
-
+# stack = [(]
 # hash {'(': ')', '{': '}', '[': ']'}
 #iterate through the string "()[]{}"
-#                              i
+#                             i
 # if the next char is not the value of the key in hash return false
 
 def validParens(str):
-    hash = {'(': ')', '{': '}', '[': ']'}
-    for i in range(len(str), 2):
-        print('next', str[i + 1])
-        print('curr', hash[str[i]])
-        if str[i + 1] != hash[str[i]]:
-            return False
-
+    hashMap = {"(": ")", "[": "]", "{": "}"}
+    stack = []
+    for bracket in str:
+        if bracket in hashMap:
+            stack.append(bracket)
+        else:
+            if not stack or hashMap[stack.pop()] != bracket:
+                return False
     return True
 
 
-# print(validParens("(])}"))
+
+# print(validParens("()[]{}"))
 
 # You are given the heads of two sorted linked lists list1 and list2.
 
@@ -224,4 +226,50 @@ def isPalindrome(s):
 
 
 
-print(isPalindrome("A man, a plan, a canal: Panama"))
+# print(isPalindrome("A man, a plan, a canal: Panama"))
+
+# Given an array of integers nums which is sorted in ascending order,
+# and an integer target, write a function to search target in nums.
+# If target exists, then return its index. Otherwise, return -1.
+
+# You must write an algorithm with O(log n) runtime complexity.
+
+# Example 1:
+
+# Input: nums = [-1,0,3,5,9,12], target = 9
+# Output: 4
+# Explanation: 9 exists in nums and its index is 4
+# Example 2:
+
+# Input: nums = [-1,0,3,5,9,12], target = 2
+# Output: -1
+# Explanation: 2 does not exist in nums so return -1
+
+#input lst of nums and a target num
+#ouput num either idx of target num in lst or -1(not found)
+# [-1,0,3,5,9,12] target 9
+#       m l m   h
+# low = 3
+# high = 5
+#
+
+def search(nums, target):
+    low = 0
+    high = len(nums)-1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if target == nums[mid]:
+            return mid
+        elif target > nums[mid]:
+            low = mid + 1
+        else:
+            high = mid -1
+
+    return -1
+
+# print(search([-1,0,3,5,9,12], 9))
+
+
+
