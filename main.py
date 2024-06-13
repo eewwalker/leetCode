@@ -273,3 +273,80 @@ def search(nums, target):
 
 
 
+# Given two strings s and t, return true if t is an anagram of s, and
+# false otherwise.
+
+# An Anagram is a word or phrase formed by rearranging the letters of a
+# different word or phrase, typically using all the original letters exactly once.
+
+# Example 1:
+# Input: s = "anagram", t = "nagaram"
+
+# Output: true
+
+# Example 2:
+# Input: s = "rat", t = "car"
+# Output: false
+
+#Input: strs s & t
+#OUtput: boolean
+# is s an anagram of t (has the same letters and same frequency of letters)
+# case sensitive
+# create a hash of s and t
+# iterate through s
+    #if a key does not match
+    # false
+    # if the value does not match
+    #false
+#true
+# s: {a: 3, n: 1, g: 1, r: 1, m: 1 }
+# t: {a: 3, n: 1, g: 1, r: 1, m: 1 }
+
+def validAnagram1(s, t):
+    if len(s) != len(t):
+        return False
+
+    hash_s = makeHash(s.lower())
+    hash_t = makeHash(t.lower())
+
+    for key in hash_s:
+        if key not in hash_t.keys():
+            return False
+        elif hash_s[key] != hash_t[key]:
+            return False
+
+    return True
+
+
+
+def makeHash(s):
+    hash = {}
+    for ele in s:
+        if ele in hash:
+            hash[ele] += 1
+        else:
+            hash[ele] = 1
+    return hash
+
+def isAnagram(s, t):
+    if len(s) != len(t):
+        return False
+
+    hash_s = {}
+    hash_t = {}
+
+    for ele in s:
+        hash_s[ele] = hash_s.get(ele, 0) + 1
+
+    for ele in t:
+        hash_t[ele] = hash_t.get(ele, 0) + 1
+
+    for key in hash_s:
+        if key not in hash_t.keys():
+            return False
+        elif hash_s[key] != hash_t[key]:
+            return False
+    return True
+
+print(isAnagram("rat", "car"))
+
