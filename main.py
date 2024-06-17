@@ -348,5 +348,17 @@ def isAnagram(s, t):
             return False
     return True
 
-print(isAnagram("rat", "car"))
+# print(isAnagram("rat", "car"))
+
+def reverseString(s):
+    # s.reverse()
+    left = 0
+    right = len(s) -1
+    while left < right:
+        s[left], s[right] = s[right], s[left]
+
+
+
+
+
 
