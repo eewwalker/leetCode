@@ -358,7 +358,101 @@ def reverseString(s):
         s[left], s[right] = s[right], s[left]
 
 
+# You are given the heads of two sorted linked lists list1 and list2.
+# Merge the two lists into one sorted list. The list should be made by
+# splicing together the nodes of the first two lists.
+# Return the head of the merged linked list.
+
+# Input: list1 = [1,2,4], list2 = [1,3,4]
+
+# Output: [1,1,2,3,4,4]
+# Example 2:
+
+# Input: list1 = [], list2 = []
+# Output: []
+# Example 3:
+
+# Input: list1 = [], list2 = [0]
+# Output: [0]
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+# iterate through first list and check the value of each node compared
+# to val of list2 node
+# whichever is lower append to new list and then move to next node
+# check both lists are empty or append list to new list
+
+def mergeTwoLists(list1, list2):
+    dummy = ListNode()
+    curr = dummy
+
+    while list1 and list2:
+        if list1.val < list2.val:
+            curr.next = list1
+            list1 = list1.next
+        else:
+            curr.next = list2
+            list2 = list2.next
+        curr = curr.next
+
+    if list1:
+        curr.next = list1
+    elif list2:
+        curr.next = list2
+
+    return dummy.next
+
+
+def sortedSquares(nums):
+    squares = []
+    smallest = abs(nums[0])
+    idx = 0
+    for i, n in enumerate(nums):
+        if abs(n) < smallest:
+            idx = i
+            smallest = abs(n)
+
+    left = idx - 1
+    right = idx + 1
+    squares.append(nums[idx]**2)
+
+    while left >= 0 and right < len(nums):
+        if abs(nums[left]) < abs(nums[right]):
+            squares.append(nums[left] **2)
+            left -= 1
+        else:
+            squares.append(nums[right]**2)
+            right += 1
+
+    while left >= 0:
+        squares.append(nums[left]**2)
+        left -= 1
+    while right < len(nums):
+        squares.append(nums[right]**2)
+        right += 1
+
+    return squares
+
+# or could append values and return squared[::-1]
+def sortedSquares2(nums):
+    squared = []
+    left = 0
+    right = len(nums) -1
+    while left < right:
+        if nums[left]**2 > nums[right]**2:
+            squared.insert(0, nums[left]**2)
+            left += 1
+        else:
+            squared.insert(0, nums[right]**2)
+            right -= 1
+
+    squared.insert(0, nums[right]**2)
 
 
 
-
+    return squared
