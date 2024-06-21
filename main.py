@@ -456,3 +456,86 @@ def sortedSquares2(nums):
 
 
     return squared
+
+
+# Linked Lists
+
+# Definition for a linked list node.
+class ListNode:
+    def __init__(self, val = 0, next= None):
+        self.val = val
+        self.next = next
+
+# [1, 2, 3, 4] => [4, 3, 2, 1]
+# hold value for prev Node
+# hold value of nextNode
+# move link to point next as previous(reverse)
+# move prev and curr node position forward
+# at end curr == None (at the end of the list)
+# prev will be the new head to return
+
+def reverse_linked_lists(head):
+    curr = head
+    prev = None
+    while curr:
+        nextNode = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nextNode
+    head = prev
+    return head
+
+
+
+# Binary Trees
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+# recursively
+def maxDepth(root):
+    if not root:
+        return 0
+    max_left = maxDepth(root.left)
+    max_right = maxDepth(root.right)
+
+    return max(max_left, max_right) + 1
+
+# iteratively
+def maxDepth2(root):
+    if not root:
+        return 0
+
+    stack = [(root, 1)]
+    ans = 0
+
+    while stack:
+        node, depth = stack.pop()
+        ans = max(ans, depth)
+        if node.left:
+            stack.append((node.left, depth + 1))
+        if node.right:
+            stack.append((node.right, depth + 1))
+
+    return ans
+
+def hasPathSum(root, targetSum):
+    def dfs(node, curr):
+        if not node:
+            return False
+        if not node.left and not node.right:
+            return (curr + node.val) == targetSum
+
+        curr += node.val
+        left = dfs(curr.left, curr)
+        right = dfs(curr.right, curr)
+        return left or right
+
+    return dfs(root, 0)
+
+
+
