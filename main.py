@@ -1,3 +1,7 @@
+
+# <------- TWO POINTERS -------------->
+
+
 ##Given an array of integers nums and an integer target, return
 # indices of the two numbers such that they add up to target.
 # You may assume that each input would have exactly one solution,
@@ -86,71 +90,6 @@ def maxProfit(prices):
         sell += 1
 
     return max_profit
-
-
-# Given a string s containing just the characters
-# '(', ')', '{', '}', '[' and ']',
-# determine if the input string is valid.
-
-# An input string is valid if:
-
-# Open brackets must be closed by the same type of brackets.
-# Open brackets must be closed in the correct order.
-# Every close bracket has a corresponding open bracket of the same type.
-# Example 1:
-    # Input: s = "()"
-    # Output: true
-
-# Example 2:
-    # Input: s = "()[]{}"
-    # Output: true
-
-# Example 3:
-    # Input: s = "(]"
-    # Output: false
-# Example 4:
-    # Input: s = '(())((()())())'
-    # Output: true
-# stack = [(]
-# hash {'(': ')', '{': '}', '[': ']'}
-#iterate through the string "()[]{}"
-#                             i
-# if the next char is not the value of the key in hash return false
-
-def validParens(str):
-    hashMap = {"(": ")", "[": "]", "{": "}"}
-    stack = []
-    for bracket in str:
-        if bracket in hashMap:
-            stack.append(bracket)
-        else:
-            if not stack or hashMap[stack.pop()] != bracket:
-                return False
-    return True
-
-
-
-# print(validParens("()[]{}"))
-
-# You are given the heads of two sorted linked lists list1 and list2.
-
-# Merge the two lists into one sorted list. The list should be made by splicing
-#  together the nodes of the first two lists.
-
-# Return the head of the merged linked list.
-
-# Example 1
-# Input: list1 = [1,2,4], list2 = [1,3,4]
-# Output: [1,1,2,3,4,4]
-
-# Example 2:
-# Input: list1 = [], list2 = []
-# Output: []
-
-# Example 3:
-# Input: list1 = [], list2 = [0]
-# Output: [0]
-
 
 # A phrase is a palindrome if, after converting all uppercase letters into
 # lowercase letters and removing all non-alphanumeric characters, it reads
@@ -358,55 +297,52 @@ def reverseString(s):
         s[left], s[right] = s[right], s[left]
 
 
-# You are given the heads of two sorted linked lists list1 and list2.
-# Merge the two lists into one sorted list. The list should be made by
-# splicing together the nodes of the first two lists.
-# Return the head of the merged linked list.
+# <---------- HASH MAP ------------------>
 
-# Input: list1 = [1,2,4], list2 = [1,3,4]
 
-# Output: [1,1,2,3,4,4]
+# Given a string s containing just the characters
+# '(', ')', '{', '}', '[' and ']',
+# determine if the input string is valid.
+
+# An input string is valid if:
+
+# Open brackets must be closed by the same type of brackets.
+# Open brackets must be closed in the correct order.
+# Every close bracket has a corresponding open bracket of the same type.
+# Example 1:
+    # Input: s = "()"
+    # Output: true
+
 # Example 2:
+    # Input: s = "()[]{}"
+    # Output: true
 
-# Input: list1 = [], list2 = []
-# Output: []
 # Example 3:
+    # Input: s = "(]"
+    # Output: false
+# Example 4:
+    # Input: s = '(())((()())())'
+    # Output: true
+# stack = [(]
+# hash {'(': ')', '{': '}', '[': ']'}
+#iterate through the string "()[]{}"
+#                             i
+# if the next char is not the value of the key in hash return false
 
-# Input: list1 = [], list2 = [0]
-# Output: [0]
-
-
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-
-# iterate through first list and check the value of each node compared
-# to val of list2 node
-# whichever is lower append to new list and then move to next node
-# check both lists are empty or append list to new list
-
-def mergeTwoLists(list1, list2):
-    dummy = ListNode()
-    curr = dummy
-
-    while list1 and list2:
-        if list1.val < list2.val:
-            curr.next = list1
-            list1 = list1.next
+def validParens(str):
+    hashMap = {"(": ")", "[": "]", "{": "}"}
+    stack = []
+    for bracket in str:
+        if bracket in hashMap:
+            stack.append(bracket)
         else:
-            curr.next = list2
-            list2 = list2.next
-        curr = curr.next
+            if not stack or hashMap[stack.pop()] != bracket:
+                return False
+    return True
 
-    if list1:
-        curr.next = list1
-    elif list2:
-        curr.next = list2
 
-    return dummy.next
 
+# print(validParens("()[]{}"))
 
 def sortedSquares(nums):
     squares = []
@@ -457,8 +393,85 @@ def sortedSquares2(nums):
 
     return squared
 
+# <-----------------SLIDING WINDOW TECH ----------------->
 
-# Linked Lists
+# find the maximum avg of subList with length k
+# [1,12,-5,-6,50,3] k = 4
+#  0  1  2  3  4  5
+def maxAvgSubList(nums, k):
+    avg = 0
+    count = 0
+    for i in range(k):
+        count += nums[i]
+        avg = count/k
+
+    for i in range(k-1, len(nums)-1):
+        count -= nums[i - (k -1)]
+        count += nums[i + 1]
+        if count/k > avg:
+            avg = count/k
+
+    return avg
+
+
+
+
+
+
+# <------------------ Linked Lists ------------------>
+
+
+
+# You are given the heads of two sorted linked lists list1 and list2.
+# Merge the two lists into one sorted list. The list should be made by
+# splicing together the nodes of the first two lists.
+# Return the head of the merged linked list.
+
+# Input: list1 = [1,2,4], list2 = [1,3,4]
+
+# Output: [1,1,2,3,4,4]
+# Example 2:
+
+# Input: list1 = [], list2 = []
+# Output: []
+# Example 3:
+
+# Input: list1 = [], list2 = [0]
+# Output: [0]
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+# iterate through first list and check the value of each node compared
+# to val of list2 node
+# whichever is lower append to new list and then move to next node
+# check both lists are empty or append list to new list
+
+def mergeTwoLists(list1, list2):
+    dummy = ListNode()
+    curr = dummy
+
+    while list1 and list2:
+        if list1.val < list2.val:
+            curr.next = list1
+            list1 = list1.next
+        else:
+            curr.next = list2
+            list2 = list2.next
+        curr = curr.next
+
+    if list1:
+        curr.next = list1
+    elif list2:
+        curr.next = list2
+
+    return dummy.next
+
+
 
 # Definition for a linked list node.
 class ListNode:
@@ -487,7 +500,7 @@ def reverse_linked_lists(head):
 
 
 
-# Binary Trees
+# <-------------- Binary Trees -------------->
 
 # Definition for a binary tree node.
 class TreeNode:
@@ -537,5 +550,14 @@ def hasPathSum(root, targetSum):
 
     return dfs(root, 0)
 
+# recursive take each sub_tree and swap its children
+def invertTree(root):
+    if not root:
+        return None
+    tmp = root.left
+    root.left = root.right
+    root.right = tmp
+    invertTree(root.right)
+    invertTree(root.left)
 
-
+    return root
