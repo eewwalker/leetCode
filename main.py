@@ -499,6 +499,16 @@ def reverse_linked_lists(head):
     return head
 
 
+def hasCycle(head):
+    slow, fast = head, head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+
+        return False
+
 
 # <-------------- Binary Trees -------------->
 
@@ -561,3 +571,13 @@ def invertTree(root):
     invertTree(root.left)
 
     return root
+
+def balancedBinTree(node):
+    def dfs(node):
+        if not node:
+            return [True, 0]
+
+        left, right = dfs(node.left), dfs(node.right)
+        balanced = left[0] and right[0] and abs(left[1]-right[1]) <= 1
+        return [balanced, max(left[1], right[1])+ 1]
+    return dfs(node)[0]
