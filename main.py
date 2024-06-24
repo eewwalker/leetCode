@@ -297,6 +297,27 @@ def reverseString(s):
         s[left], s[right] = s[right], s[left]
 
 
+
+# NOT COMPLETE
+def threeSum(nums):
+    triplets = []
+    for i in range(len(nums)):
+        left = i + 1
+        right = len(nums)-1
+        while left < right:
+            sum = (nums[i]) + (nums[left]) + (nums[right])
+            if sum == 0:
+                triplets.append([nums[i], nums[left], nums[right]])
+                right -= 1
+                left += 1
+            elif sum < 0:
+                right -= 1
+            else:
+                left += 1
+    return triplets
+
+print(threeSum([-1,0,1,2,-1,-4]))
+
 # <---------- HASH MAP ------------------>
 
 
@@ -581,3 +602,48 @@ def balancedBinTree(node):
         balanced = left[0] and right[0] and abs(left[1]-right[1]) <= 1
         return [balanced, max(left[1], right[1])+ 1]
     return dfs(node)[0]
+
+#  Imagine you are given an array of integers and you are asked to find the
+# length of the longest subsequence where the difference between adjacent
+# elements is one.
+
+# INTERVALS
+# You are given an array of non-overlapping intervals intervals where
+# intervals[i] = [starti, endi] represent the start and the end of the ith
+# interval and intervals is sorted in ascending order by starti. You are also
+# given an interval newInterval = [start, end] that represents the start and
+# end of another interval.
+
+# Insert newInterval into intervals such that intervals is still sorted in
+# ascending order by starti and intervals still does not have any overlapping
+# intervals (merge overlapping intervals if necessary).
+
+# Return intervals after the insertion.
+
+# Note that you don't need to modify intervals in-place.
+# You can make a new array and return it.
+
+# Example 1:
+
+# Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+# Output: [[1,5],[6,9]]
+# Example 2:
+
+# Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+# Output: [[1,2],[3,10],[12,16]]
+# Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+
+
+def insert(intervals, newInterval):
+    left = []
+    right = []
+    start, end = newInterval
+    for x,y in intervals:
+        if start > x and start > y:
+            left.append([x, y])
+        elif end < x and end < y:
+            right.append([x, y])
+        else:
+            start = min(start, x)
+            end = max(end, y)
+    return left + [[start, end]] + right
