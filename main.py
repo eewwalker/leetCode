@@ -1,6 +1,4 @@
-
-# <------- TWO POINTERS -------------->
-
+# <--------- HASH TABLES -------------->
 
 ##Given an array of integers nums and an integer target, return
 # indices of the two numbers such that they add up to target.
@@ -44,6 +42,9 @@ def twoSum2(nums, target_num):
             return [hash[diff], i]
         else:
             hash[diff] = i
+
+# <------- TWO POINTERS -------------->
+
 
 
 

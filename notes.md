@@ -13,9 +13,6 @@ relative to input size
 0(n^3) CUBIC
 
 
-
-
-
 # Space complexity: as the input size grows, how much more memory does the algorithm use?
 
 ## HINTS
@@ -58,3 +55,22 @@ Reference types => generally O(n), where n is length of array (or keys in object
 
 Binary Search => logn
 Best runtime for sorting => nlog2n
+
+# RECURSION
+function that calls itself
+
+recursive function --- iterative function
+Every function call "exists" until it returns.
+Each function call also has its own local scope.
+
+## NEEDS
+    base case (condition at start of function that terminate the calls)
+    recursive case
+
+### ARRAYS AND STRINGS
+
+
+# TWO POINTERS
+    never have more than 0(n) iterations
+    0(1) space because of left and right (for a simple is palindrome problem)
+    
