@@ -1,3 +1,30 @@
+
+Problem: Understand the problem (requirements) expected input/output
+    should output be something else? Its an array unless the input is invalid then its false?
+    details of problem
+    do indices need to be in order [0, 1] or can i return [1, 0] ?
+    what about empty [] or '' what to return?
+
+Example/TestCases: Sometimes given or need to write own but understand expected inputs and outputs
+    Happy path - expected input, expected output
+    Not Happy Path - unless told always receive valid input and always an answer
+    Then use test cases to test code
+
+Data Structure:
+    Tools needed to get input and give output
+    Not committing to anything just notice what we need maybe an object with key:val pairs..
+
+Algorithm:
+    Walk through the problem not too detailed but with enough detail to understand how to walk through the problem IN ANY LANGUAGE
+    Should be able to implement in any language you want
+    Should have nothing else left to figure out/logically
+
+Coding:
+    Start coding
+    If something is wrong and there's a mistake... go back to algo instead of continuing to code
+    
+
+
 ### Big O =>
     used to describe computational complexity of an algo: how code performs as input grows
         /                           \
@@ -73,4 +100,4 @@ Each function call also has its own local scope.
 # TWO POINTERS
     never have more than 0(n) iterations
     0(1) space because of left and right (for a simple is palindrome problem)
-    
+
