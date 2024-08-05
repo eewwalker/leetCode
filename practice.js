@@ -51,6 +51,47 @@ function twoSumSorted(arr, target) {
 //TWO ITERABLES AS INPUT
 
 //392. Is Subsequence
+/**
+ * P:
+ *  input: two strings
+ *    s = "abc", t = "ahbgdc"
+ *  output: boolean
+ *    true is s is subsequence of t
+ *  both strings can be 0 chars long
+ *
+ * E:
+ *                              i
+ *  Input: s = "abc", t = "ahbgdc"
+ *                j
+    Output: true
+                                i
+    Input: s = "axc", t = "ahbgdc"
+                 j
+    Output: false
+
+  D:
+    going to use a two pointer approach
+
+  A:
+    iterate through t string with pointer
+    set second pointer j = 0
+    do the two chars === eachother?
+        if not increment i
+        if do increment both pointers
+    after iteration is done on t string
+      return does j === length of s -1
+ */
+
+    function isSubsequence(s, t) {
+      let j =0;
+      for (let i = 0; i < t.length; i++) {
+        if (s[j] === t[i]) {
+          j++;
+        }
+      }
+      return j === s.length;
+    }
+
 
 
 //REVERSE STRING
@@ -92,7 +133,7 @@ A:
       left++;
       right--;
     }
-    return words; 
+    return words;
   }
 
   //SQUARES OF A SORTED ARRAY
