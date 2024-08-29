@@ -22,7 +22,7 @@ Algorithm:
 Coding:
     Start coding
     If something is wrong and there's a mistake... go back to algo instead of continuing to code
-    
+
 
 
 ### Big O =>
@@ -98,6 +98,12 @@ Each function call also has its own local scope.
 
 
 # TWO POINTERS
+    efficently traverse or manipulate sequential data structure..array, linked list,   string
+        - find two data elements in an array that satisfy a certain condition
+        - linear DS
+        - process data elements at two different positions simultaneously
+        - pointers move independent of eachother
+        
     never have more than 0(n) iterations
     0(1) space because of left and right (for a simple is palindrome problem)
 
