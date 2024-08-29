@@ -191,3 +191,57 @@ A:
     }
     return output;
   }
+
+  /**
+  P:
+    sum of three values
+    input: array of integers, target
+    output: boolean
+    are there three nums in the array that equal to the target?
+    if array < 3 return false
+  E:
+    [1, 2, 2, 6, 1], 5
+    => true
+    [1, 3, 5, 2, 8], 18
+    => false
+  D:
+    multiple pointers low and high
+    track the current element
+           i  l
+    [1, 1, 2, 2, 6], 10
+                 h
+  A:
+    sort the array
+    iterate through the array with i until second to last element
+    create the low and high pointers from the curr element
+    if the curr ele + low + high === target
+      return true
+    otherwise increment or decrement the low / high
+    if not found target after iterating through array with i
+      return false
+  C:
+   */
+
+  function sumOfThreeValues(array, target) {
+    array = array.sort((a, b) => a - b);
+
+    for (let i = 0; i < array.length-2; i++) {
+      let low = i + 1;
+      let high = array.length -1;
+
+      while (low < high) {
+        let sum = array[i] + array[low] + array[high];
+        
+        if (sum === target) return true;
+        else if (sum > target) {
+          high--;
+        } else {
+          low++;
+        }
+      }
+    }
+    return false;
+
+  }
+
+  console.log(sumOfThreeValues, [1, 1, 6, 2, 2], 10 )
