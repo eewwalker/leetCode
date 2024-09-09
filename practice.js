@@ -231,7 +231,7 @@ A:
 
       while (low < high) {
         let sum = array[i] + array[low] + array[high];
-        
+
         if (sum === target) return true;
         else if (sum > target) {
           high--;
@@ -244,4 +244,131 @@ A:
 
   }
 
-  console.log(sumOfThreeValues, [1, 1, 6, 2, 2], 10 )
+/**
+ * 3Sum
+ *
+ *P:
+  * input: array of nums
+  * output: array of arrays inner arrays are the three chars that add to 0
+ *    the output can not contain duplicate triplets eg input: [0, 0, 0]
+ *                                                    output : [0, 0, 0]  ONCE
+ *
+ *E:
+ *  Input: nums = [-1,0,1,2,-1,-4]
+    Output: [[-1,-1,2],[-1,0,1]]
+ *
+  D:
+    keep track of curr element
+    have a low and high pointer along with curr
+    output arr
+
+  A:
+    first want to sort arr so I can use multiple pointers
+      sort array  => [-4,-1,-1,0,1,2]
+    iterate through the array with i
+
+        l
+    [-4,-1,-1,0,1,2]
+      i
+                  h
+        l
+    i
+    [0, 0, 0]
+            h
+
+    then make a low and high pointer
+    do the three ele at i, l, h === 0 ?
+        push to the output array [ele, ele, ele]
+
+
+ */
+
+
+
+//FAST AND SLOW POINTERS
+
+/**
+ * P:
+ * happy number? start with num => replace the num with sum of the square of its
+ * digits => repeat until num === 1 (happy num)
+ * or
+ * num enters a cycle (not a happy num)
+ * input: number
+ * output: boolean happy num/unhappy num
+ *
+ * E:
+ * input: 23
+ * output: true
+ *
+ * D:
+ *
+ * A:
+ *  input: n = 23
+ *  does n === 1
+ *    if not take 2^2 + 3^2 = 13
+ *                1^2 + 3^2 = 10
+ *                1^2 + 0^2 = 1
+ */
+
+function happyNumber(n) {
+  let slow = n;
+  let fast = sumOfSquaredVals(n);
+  while (slow !== fast) {
+    if (fast === 1) return true;
+    slow = sumOfSquaredVals(slow);
+    fast = sumOfSquaredVals(sumOfSquaredVals(fast));
+  }
+  return fast === 1;
+}
+
+function sumOfSquaredVals(n) {
+  return [...String(n)].reduce((acc, curr)=> acc + Number(curr)**2, 0);
+}
+
+//141. Linked List Cycle
+/**
+ * P:
+ * given the head of a linked list determine if there is a cycle
+ * input: head node
+ * output: boolean
+ *
+ * cycle meaning two different pointers are pointing to the same node
+ * use rabbit/hare algo
+ *
+ * E:
+ *  3-2-0-4
+ *    ^
+ *    |- -|
+ *        v
+ *  node 4 .next is node 2 so there is a cycle
+ * output: false
+ *
+ * D:
+ * slow pointer = starts at the head and moves one step
+ * fast pointer = starts at the head and moves two steps
+ * if they meet(are the same) theres a cycle
+ *
+ * A:
+ * initialize to pointers slow and fast at the head node
+ *
+ * while fast and fast.next !== null
+ * if slow === fast return true
+ * move slow one slow = slow.next
+ * move fast two fast = fast.next.next
+ * return false
+ */
+
+// * function ListNode(val) {
+// *     this.val = val;
+// *     this.next = null;
+// * }
+function hasCycle(head) {
+  let slow = head;
+  let fast = head;
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next
+    fast = fast.next.next;
+    if (slow === fast) return true;
+  }
+  return false;
+}

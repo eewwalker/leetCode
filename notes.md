@@ -103,7 +103,22 @@ Each function call also has its own local scope.
         - linear DS
         - process data elements at two different positions simultaneously
         - pointers move independent of eachother
-        
+
     never have more than 0(n) iterations
     0(1) space because of left and right (for a simple is palindrome problem)
 
+
+
+
+
+
+### LINKED LISTS/ARRAY/STRING (Linear DS)
+
+# FAST AND SLOW POINTERS
+    uses pointers to traverse a iterable data structure
+    often used to find cycles, identify patterns, find specific elements
+    start at same position- move at different speeds
+
+## Example problems
+    Find middle of element
+    Detect cycle in iterable
