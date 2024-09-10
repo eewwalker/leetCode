@@ -122,3 +122,29 @@ Each function call also has its own local scope.
 ## Example problems
     Find middle of element
     Detect cycle in iterable
+
+
+
+### STACKS (Linear DS)
+
+    LIFO Last In First Out
+    push(add element to back or top of stack) and pop(remove element from back or top of stack..will normally return element)
+    peek(returns element at top of stack without removing it)
+    isEmpty(checks whether stack is empty...returns Boolean)
+    size(return total number of elements in stack)
+    stacks have capacity limits (size of stack)
+    stack overflow => attempting to push onto a full stack
+    stack underflow => attempting to pop from an empty stack
+
+can be implemented with a array(push/pop from back/top) or linked list(add/remove from top/where head node is)
+
+## Examples/Usages
+    Reverse order processing: last element should be processed first
+    Nested structures handling
+    State tracking
+    Expression evaluation
+
+    Function stack/Call stack
+    Text editor undo/redo => command Z
+    Browser back and forward button
+    
