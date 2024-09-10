@@ -313,6 +313,7 @@ A:
 function happyNumber(n) {
   let slow = n;
   let fast = sumOfSquaredVals(n);
+
   while (slow !== fast) {
     if (fast === 1) return true;
     slow = sumOfSquaredVals(slow);
@@ -372,3 +373,79 @@ function hasCycle(head) {
   }
   return false;
 }
+//T: O(n)
+//S: O(1)
+
+
+/**
+ * P:
+ * Find the middle node of a singly linked list
+ * if the list is even will be the middle node
+ * if the list is odd will be the second of the middle nodes
+ * E:
+ *              s
+ *  1 → 3 → 5 → 7 → 9 → 11 → NULL => 7
+ *                            f
+ *        s
+ *  1 - 3 - 5 - 9 - 11 - NULL => 5
+ *                   f
+ * D:
+ *  slow and fast pointers
+ *  slow = one step to next node
+ *  fast = two steps to next next node
+ * A:
+ *  both pointers point to the head node
+ *  while fast is not null and fast.next is not null
+ *  move the pointers
+ *    slow once
+ *    fast twice
+ *  if the list is even fast.next becomes null and return slow node
+ *  if the list is odd fast becomes null and return slow node
+ */
+function getMiddleNode(head) {
+
+}
+
+//T: O(n)
+//S: O(1)
+
+
+//STACKS
+
+/**
+ * P:
+ *  input: string
+ *  output: string
+ * remove adjacent duplicates
+ * E:
+ *  'aabccde' => 'bde'
+ *  'aabbccdd' => ''
+ *  'abcde' => 'abcde'
+ *  'abcbbce' => 'abe'
+ * D:
+ *  use a stack to keep track of adjacent elements
+ *  push and pop from stack to keep order
+ * A:
+ *  create a stack
+ *  iterate through the string
+ *  if the stack is not empty and the last ele in the stack is the curr ele
+ *      pop off the stack => adjacent duplicate
+ *  otherwise
+ *      push to the stack
+ *  return the joined stack to output a string
+ *
+ */
+function removeAdjacentDuplicates(string) {
+  let stack = [];
+  for (let ele of string) {
+    if (stack.length && stack[stack.length-1] === ele){
+        stack.pop();
+    }else {
+      stack.push(ele);
+    }
+  }
+  return stack.join('');
+}
+
+//T: O(n)
+//S: O(n)
