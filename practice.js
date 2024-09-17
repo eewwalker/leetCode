@@ -27,7 +27,6 @@ function isPalindrome(word) {
 }
 
 
-//TWO SUM SORTED ARRAY
 //167. Two Sum II - Input array is sorted
 
 function twoSumSorted(arr, target) {
@@ -191,6 +190,26 @@ A:
     }
     return output;
   }
+
+  function sortedSquares(nums) {
+    const squaredNums = [];
+    let fillPos = nums.length-1;
+    let left = 0;
+    let right = nums.length-1;
+
+    while (left < right) {
+        if (nums[left]**2 >= nums[right]**2){
+            squaredNums[fillPos] = nums[left]**2;
+            left++;
+        }else {
+            squaredNums[fillPos] = nums[right]**2;
+            right--;
+        }
+        fillPos--;
+    }
+    squaredNums[fillPos] = nums[right]**2;
+    return squaredNums;
+};
 
   /**
   P:
@@ -449,3 +468,100 @@ function removeAdjacentDuplicates(string) {
 
 //T: O(n)
 //S: O(n)
+
+
+
+
+//matrix problems
+
+
+/**
+ * P: given a matrix
+ * [0,0,0]
+ * [1,2,2]
+ * [1,0,2]
+ * return the abs value of the left diagonal - the right diagonal
+ *
+ * E:
+ * 0 + 2 + 2 = 4
+ * 0 + 2 + 1 = 3
+ * 4 - 3 = 1 and if a negative num return the absolute val
+ *
+ * D:
+ * left and right variable to keep track of the sums
+ * left is 00, 11, 22
+ * right is 02, 11, 20
+ *
+ * length is length 3 - idx 0 - 1 2
+ *           3 - 1 - 1 1
+ *           3 - 2 - 1
+ * A:
+ * iterate through the nums
+ *  use ii for left because it will remain the same idx
+ *
+ */
+
+function countDiagonals(matrix) {
+  let leftDiagonals = 0;
+  let rightDiagonals = 0;
+
+  for(let i = 0; i < matrix.length; i++) {
+    leftDiagonals += matrix[i][i];
+    rightDiagonals += matrix[i][matrix.length - i - 1]
+  }
+  return Math.abs(leftDiagonals - rightDiagonals);
+}
+
+
+//SLIDING WINDOW TECHNIQUE
+
+
+
+/**
+ * input: array of nums, a number k
+ * output: number (max average)
+ *  given an array of nums find a subarray
+ *          whose length is equal to k(num)
+ *          has maximum average
+ * E:
+ *
+ *  [1,12,-5,-6,50,3], k = 4 ouput = 12.75000 [12, -5, -6, 50]
+ *
+ *  [5], k = 1  output = 5 [5]
+ *
+ * sliding window
+ *   s = 0
+ *  [4, 0, 4, 3, 3]  k = 5
+ *   e = 0
+ *
+ * maxAvg = -INifinity
+ * currSum = 0
+ *
+ *  start our s, e pointers at 0
+ *  move the e until the condition of length === k is met
+ *  take the average of the elements in that window
+ *    save that in a var check against old avg.. which is larger?
+ *  once the window becomes larger than k
+ *    shrink with start pointer
+ */
+function findMaxAverage(nums, k) {
+  let s = 0;
+  let maxAvg = -Infinity;
+  let currSum = 0;
+
+    for (let e = 0; e < nums.length; e++) {
+      currSum += nums[e];
+      while (e - s + 1 > k) {
+        currSum -= nums[s];
+        s++;
+      }
+
+      let subArrayLen = e - s + 1;
+      if (subArrayLen === k) {
+
+        maxAvg = Math.max(maxAvg, currSum / subArrayLen);
+      }
+    }
+
+    return maxAvg;
+}
