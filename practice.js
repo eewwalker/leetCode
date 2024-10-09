@@ -565,3 +565,79 @@ function findMaxAverage(nums, k) {
 
     return maxAvg;
 }
+
+
+//LEETCODE
+  //1418.Display Table Of Food Orders in a Restaurant
+
+  /**
+orders = [["David","3","Ceviche"],["Corina","10","Beef Burrito"],["David","3","Fried Chicken"],
+            ["Carla","5","Water"],["Carla","5","Ceviche"],["Rous","3","Ceviche"]]
+
+output = [
+                //table then list all food items in alph order
+            ["Table", "Beef Burrito", "Ceviche", "Fried Chicken", "Water"],
+                //table #, # of orders of the item per this table
+                    //repeat for each table ORDER BY table # desc
+            ["3","0","2","1","0"],["5","0","1","0","1"],["10","1","0","0","0"]
+        ]
+]
+
+ [["David","3","Ceviche"],["Corina","10","Beef Burrito"],["David","3","Fried Chicken"],
+            ["Carla","5","Water"],["Carla","5","Ceviche"],["Rous","3","Ceviche"]]
+
+    const hash = {
+        3:{Ceviche: 2, Fried Chicken: 1}, 10:{Beef Burrito: 1}, 5: {Water: 1, Ceviche: 1}
+        }
+
+    const displayTable = []
+    iterate through the hash and put all item names in an array ["all in"]
+        sort that array
+            add table to the front
+    sort the hash by key desc
+    iterate through the hash
+        use the displayTable starting at idx 1 where a food item is
+            and check the hash if the key exists
+                if not then push a 0
+                or push the val of the key
+ */
+
+function displayTable(orders){
+  const hashMap = {};
+  const displayTable = [];
+
+  for (let [_, table, order] of orders) {
+      if (!hashMap[table]) {
+              hashMap[table] = {};
+      }
+      if(hashMap[table][order]){
+          hashMap[table][order]++;
+
+      }else {
+          hashMap[table][order] = 1;
+      }
+  }
+  const header = [];
+  for (let order in hashMap){
+      let keys = Object.keys(hashMap[order])
+      header.push(...keys)
+  }
+    const removeDuplicatesArray = Array.from(new Set(header.sort()))
+    displayTable.push(['Table', ...removeDuplicatesArray]);
+
+  for (let table in hashMap) {
+          let tableArr = [table];
+          for(let i = 1; i < displayTable[0].length; i++) {
+              if (Object.keys(hashMap[table]).includes(displayTable[0][i])) {
+                  tableArr.push(String(hashMap[table][displayTable[0][i]]))
+              }else {
+                  tableArr.push("0");
+              }
+          }
+
+      displayTable.push(tableArr);
+  }
+
+
+  return displayTable;
+};
